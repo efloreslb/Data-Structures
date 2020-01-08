@@ -49,7 +49,21 @@ class DoublyLinkedList:
         return self.length
 
     def add_to_head(self, value):
-        pass
+        new_node = ListNode(value)
+        self.length += 1
+        # Case 1: Empty List
+        if self.head is None and self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        # Case 2: Not Empty
+        else: 
+            # Save old head to local variable
+            old_head = self.head
+            # Link both nodes
+            new_node.next = old_head
+            old_head.prev = new_node
+            # Assign new node as DLL head
+            self.head = new_node
 
     def remove_from_head(self):
         pass
@@ -58,7 +72,9 @@ class DoublyLinkedList:
         pass
 
     def remove_from_tail(self):
-        pass
+        value = self.tail.value
+        self.delete(self.tail)
+        return value
 
     def move_to_front(self, node):
         pass
