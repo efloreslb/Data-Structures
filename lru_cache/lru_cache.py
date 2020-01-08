@@ -12,6 +12,7 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
+        self.size = 0
         self.limit = limit
         self.storage = DoublyLinkedList()
 
@@ -23,7 +24,9 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        if self.size == 0:
+            return None
+        
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -36,4 +39,9 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+
+        if self.size >= self.limit:
+            self.storage.remove_from_tail()
+            
+        self.size += 1
+        self.storage.add_to_head({key: value})
